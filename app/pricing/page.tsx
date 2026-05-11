@@ -59,6 +59,7 @@ export default function PricingPage() {
                 "Community access"
             ],
             buttonText: "Get Started",
+            link: "/register",
             premium: false
         },
         {
@@ -76,6 +77,7 @@ export default function PricingPage() {
                 "Backup & Cloud sync"
             ],
             buttonText: "Upgrade to Pro",
+            link: "/checkout?plan=pro",
             premium: true,
             popular: true
         },
@@ -92,7 +94,8 @@ export default function PricingPage() {
                 "Custom wardrobe reports",
                 "Exclusive brand discounts"
             ],
-            buttonText: "Contact Sales",
+            buttonText: "Join Elite",
+            link: "/checkout?plan=elite",
             premium: true
         }
     ];
@@ -167,7 +170,7 @@ export default function PricingPage() {
                                     ))}
                                 </div>
 
-                                <Link href="/register" className="w-full">
+                                <Link href={plan.link} className="w-full">
                                     <Button 
                                         variant={plan.popular ? 'default' : 'outline'} 
                                         className={`w-full h-14 rounded-2xl text-lg font-bold transition-all duration-300 ${

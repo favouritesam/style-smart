@@ -135,6 +135,7 @@ export default function RecommendationsPage() {
                         sustainability: 91,
                         image: '/images/recommendations/minimalist_monday.png'
                     }
+
                 ];
                 setRecommendations(mockRecs);
             } catch (err) {

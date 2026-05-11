@@ -257,10 +257,12 @@ export const useWardrobeStore = create<WardrobeStore>()(
             },
 
             // Remove item from wardrobe by ID
-            removeItem: (itemId) =>
+            removeItem: (itemId) => {
                 set((state) => ({
                     items: state.items.filter((item) => item.id !== itemId),
-                })),
+                }));
+                get().filterItems();
+            },
 
             // Set loading state
             setIsLoading: (loading) => set({ isLoading: loading }),

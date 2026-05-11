@@ -78,10 +78,21 @@ export default function CookiesPage() {
                                 Most browsers allow you to refuse to accept cookies and to delete cookies. The methods for doing so vary from browser to browser, and from version to version. You can however obtain up-to-date information about blocking and deleting cookies via these links:
                             </p>
                             <div className="flex flex-wrap gap-4 pt-2">
-                                {["Chrome", "Firefox", "Safari", "Edge"].map((browser) => (
-                                    <div key={browser} className="px-4 py-2 bg-muted rounded-xl text-sm font-bold opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
-                                        {browser}
-                                    </div>
+                                {[
+                                    { name: "Chrome", url: "https://support.google.com/chrome/answer/95647" },
+                                    { name: "Firefox", url: "https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" },
+                                    { name: "Safari", url: "https://support.apple.com/kb/ph21411" },
+                                    { name: "Edge", url: "https://support.microsoft.com/en-gb/help/4468242/microsoft-edge-browsing-data-and-privacy" }
+                                ].map((browser) => (
+                                    <a 
+                                        key={browser.name} 
+                                        href={browser.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-4 py-2 bg-muted rounded-xl text-sm font-bold opacity-60 hover:opacity-100 hover:text-primary hover:bg-primary/10 transition-all"
+                                    >
+                                        {browser.name}
+                                    </a>
                                 ))}
                             </div>
                         </section>

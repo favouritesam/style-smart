@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Menu, X, LogOut, User, MoreVertical, Sparkles, Calendar, ShoppingBag, Bot, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useAuthStore } from '@/lib/store';
+import {useAuthStore} from '@/lib/store';
 
 /**
  * Header component with responsive navigation
@@ -150,9 +150,9 @@ export function Header() {
                                 <details className="relative inline-block">
                                     <summary
                                         className="cursor-pointer p-2 rounded-md hover:bg-muted transition-colors"
-                                        aria-label="User menu"
+                                        // aria-label="User menu"
                                     >
-                                        <MoreVertical className="w-5 h-5" />
+                                        {/*<MoreVertical className="w-5 h-5" />*/}
                                     </summary>
                                     <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg py-2 z-10">
                                         <Link
