@@ -1,110 +1,165 @@
 /**
  * Contact Page
- * Premium contact form and support information.
+ * Premium contact/sales inquiry interface for Elite plan and general support.
  */
 
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MessageSquare, MapPin, Send, Loader2 } from 'lucide-react';
+import { 
+    Mail, 
+    MessageCircle, 
+    ArrowLeft, 
+    Send, 
+    CheckCircle2, 
+    Globe, 
+    Users,
+    Zap,
+    MapPin
+} from 'lucide-react';
+import Link from 'next/link';
 
-import { toast } from 'sonner';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
 
 export default function ContactPage() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        setIsSubmitting(false);
+        setSubmitted(true);
+        toast.success("Message sent! Our team will contact you soon.");
+    };
+
     return (
         <MainLayout>
-            <div className="pt-24 pb-32">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
-                        {/* Left: Contact Info */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="space-y-12"
-                        >
+            <div className="pt-24 pb-32 min-h-screen bg-slate-50/50">
+                <div className="max-w-6xl mx-auto px-4">
+                    <motion.div 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="mb-12"
+                    >
+                        <Link href="/pricing" className="inline-flex items-center text-sm font-bold text-muted-foreground hover:text-primary transition-colors group">
+                            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> BACK TO PRICING
+                        </Link>
+                    </motion.div>
+
+                    <div className="grid lg:grid-cols-2 gap-16">
+                        {/* Left Column: Content */}
+                        <div className="space-y-12">
                             <div className="space-y-6">
-                                <h1 className="text-4xl md:text-7xl font-black leading-tight">Get in Touch</h1>
+                                <motion.div
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold mb-2"
+                                >
+                                    <Users className="w-3 h-3" /> ELITE CONCIERGE
+                                </motion.div>
+                                <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
+                                    Let's Design Your <br /> <span className="text-primary">Perfect Fit.</span>
+                                </h1>
                                 <p className="text-xl text-muted-foreground leading-relaxed max-w-md">
-                                    Have a question about StyleSmart? Our team is here to help you revolutionize your wardrobe.
+                                    Interested in the Elite plan or have a custom request? Fill out the form and our head stylist will reach out within 24 hours.
                                 </p>
                             </div>
 
-                            <div className="space-y-8">
-                                <div className="flex items-center gap-6 group">
-                                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                                        <Mail className="w-6 h-6" />
+                            <div className="grid sm:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <div className="p-3 bg-white rounded-2xl w-fit shadow-sm">
+                                        <Mail className="w-6 h-6 text-primary" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">Email Us</p>
-                                        <p className="text-xl font-bold">hello@stylesmart.ai</p>
+                                        <h4 className="font-bold">Email Us</h4>
+                                        <p className="text-sm text-muted-foreground">elite@stylesmart.ai</p>
                                     </div>
                                 </div>
-
-                                <div className="flex items-center gap-6 group">
-                                    <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                                        <MessageSquare className="w-6 h-6" />
+                                <div className="space-y-4">
+                                    <div className="p-3 bg-white rounded-2xl w-fit shadow-sm">
+                                        <Globe className="w-6 h-6 text-accent" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">Support Chat</p>
-                                        <p className="text-xl font-bold">Available 24/7</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-6 group">
-                                    <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all duration-500">
-                                        <MapPin className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">Office</p>
-                                        <p className="text-xl font-bold">New York, NY</p>
+                                        <h4 className="font-bold">Global Support</h4>
+                                        <p className="text-sm text-muted-foreground">Available 24/7 for Elite members</p>
                                     </div>
                                 </div>
                             </div>
-                        </motion.div>
 
-                        {/* Right: Form */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            animate={{ opacity: 1, x: 0 }}
-                        >
-                            <Card className="p-10 md:p-12 rounded-[3rem] border-none shadow-2xl bg-card">
-                                <form className="space-y-6" onSubmit={(e) => {
-                                    e.preventDefault();
-                                    toast.success("Message sent successfully!", { description: "Our team will get back to you shortly." });
-                                }}>
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        <div className="space-y-2">
-                                            <Label className="text-sm font-bold uppercase tracking-wider">Full Name</Label>
-                                            <Input placeholder="John Doe" className="rounded-xl h-12 bg-muted border-none" />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label className="text-sm font-bold uppercase tracking-wider">Email Address</Label>
-                                            <Input placeholder="john@example.com" className="rounded-xl h-12 bg-muted border-none" />
-                                        </div>
+                            <div className="pt-12 border-t border-slate-200">
+                                <div className="flex items-center gap-4 text-sm font-bold text-muted-foreground">
+                                    <MapPin className="w-4 h-4" /> Based in London, UK
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Column: Form */}
+                        <div>
+                            {!submitted ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                >
+                                    <Card className="p-8 md:p-12 rounded-[3rem] border-none shadow-2xl bg-white">
+                                        <form onSubmit={handleSubmit} className="space-y-6">
+                                            <div className="space-y-2">
+                                                <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">Full Name</Label>
+                                                <Input required placeholder="Jane Doe" className="h-14 rounded-2xl bg-slate-50 border-none focus-visible:ring-2 focus-visible:ring-primary/20" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">Email Address</Label>
+                                                <Input required type="email" placeholder="jane@example.com" className="h-14 rounded-2xl bg-slate-50 border-none focus-visible:ring-2 focus-visible:ring-primary/20" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">Subject</Label>
+                                                <Input required placeholder="Elite Plan Inquiry" className="h-14 rounded-2xl bg-slate-50 border-none focus-visible:ring-2 focus-visible:ring-primary/20" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">Your Message</Label>
+                                                <Textarea required placeholder="Tell us about your style goals..." className="min-h-[150px] rounded-2xl bg-slate-50 border-none focus-visible:ring-2 focus-visible:ring-primary/20 p-4" />
+                                            </div>
+                                            <Button 
+                                                type="submit" 
+                                                disabled={isSubmitting}
+                                                className="w-full h-16 rounded-[2rem] bg-primary hover:bg-primary/90 text-lg font-black shadow-xl shadow-primary/20 group"
+                                            >
+                                                {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
+                                                {!isSubmitting && <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+                                            </Button>
+                                        </form>
+                                    </Card>
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="h-full flex flex-col items-center justify-center text-center space-y-6"
+                                >
+                                    <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-xl shadow-green-200">
+                                        <CheckCircle2 className="w-10 h-10 text-white" />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label className="text-sm font-bold uppercase tracking-wider">Subject</Label>
-                                        <Input placeholder="How can we help?" className="rounded-xl h-12 bg-muted border-none" />
+                                        <h3 className="text-3xl font-black">Message Sent!</h3>
+                                        <p className="text-muted-foreground">Our Elite concierge team will contact you shortly.</p>
                                     </div>
-                                    <div className="space-y-2">
-                                        <Label className="text-sm font-bold uppercase tracking-wider">Message</Label>
-                                        <textarea 
-                                            className="w-full h-40 rounded-xl bg-muted border-none p-4 text-sm focus:ring-2 focus:ring-primary outline-none transition-all"
-                                            placeholder="Tell us more about your inquiry..."
-                                        />
-                                    </div>
-                                    <Button className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-lg shadow-primary/20">
-                                        <Send className="w-5 h-5 mr-2" /> Send Message
+                                    <Button asChild variant="outline" className="h-14 px-8 rounded-2xl font-bold border-2">
+                                        <Link href="/">RETURN HOME</Link>
                                     </Button>
-                                </form>
-                            </Card>
-                        </motion.div>
+                                </motion.div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

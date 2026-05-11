@@ -381,9 +381,9 @@ export default function ProfilePage() {
                                     </TabsTrigger>
                                 </TabsList>
 
-                                <AnimatePresence mode="wait">
-                                    <TabsContent value="overview">
+                                <TabsContent value="overview">
                                         <motion.div 
+                                            key="overview"
                                             variants={itemVariants}
                                             initial="hidden"
                                             animate="visible"
@@ -461,10 +461,11 @@ export default function ProfilePage() {
                                                 </div>
                                             </Card>
                                         </motion.div>
-                                    </TabsContent>
+                                </TabsContent>
 
-                                    <TabsContent value="edit">
+                                <TabsContent value="edit">
                                         <motion.div 
+                                            key="edit"
                                             variants={itemVariants}
                                             initial="hidden"
                                             animate="visible"
@@ -530,10 +531,11 @@ export default function ProfilePage() {
                                                 )}
                                             </Card>
                                         </motion.div>
-                                    </TabsContent>
+                                </TabsContent>
 
-                                    <TabsContent value="preferences">
+                                <TabsContent value="preferences">
                                         <motion.div 
+                                            key="preferences"
                                             variants={itemVariants}
                                             initial="hidden"
                                             animate="visible"
@@ -575,10 +577,11 @@ export default function ProfilePage() {
                                                 </Button>
                                             </Card>
                                         </motion.div>
-                                    </TabsContent>
+                                </TabsContent>
 
-                                    <TabsContent value="settings">
+                                <TabsContent value="settings">
                                         <motion.div 
+                                            key="settings"
                                             variants={itemVariants}
                                             initial="hidden"
                                             animate="visible"
@@ -629,8 +632,7 @@ export default function ProfilePage() {
                                                 </div>
                                             </Card>
                                         </motion.div>
-                                    </TabsContent>
-                                </AnimatePresence>
+                                </TabsContent>
                             </Tabs>
                         </div>
                     </motion.div>

@@ -28,6 +28,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { useWardrobeStore, WardrobeItem } from '@/lib/store';
+import {toast} from "sonner";
 
 /**
  * Animation Variants
@@ -266,7 +267,10 @@ export default function WardrobePage() {
                                                                 <Heart className={`w-3.5 h-3.5 ${item.isFavorite ? 'fill-current' : ''}`} />
                                                             </button>
                                                             <button 
-                                                                onClick={() => removeItem(item.id)}
+                                                                onClick={() => {
+                                                                    removeItem(item.id);
+                                                                    toast.error('Item removed from wardrobe');
+                                                                }}
                                                                 className="p-2 hover:bg-destructive/10 text-muted-foreground hover:text-destructive rounded-full transition-colors"
                                                             >
                                                                 <Trash2 className="w-3.5 h-3.5" />
@@ -332,19 +336,23 @@ export default function WardrobePage() {
                 {/* Wardrobe Summary Footer */}
                 {!isLoading && filteredItems.length > 0 && (
                     <div className="max-w-7xl mx-auto px-4 mt-20">
-                        <Card className="p-8 rounded-[3rem] bg-gradient-to-br from-card to-muted border-none shadow-inner flex flex-wrap items-center justify-center gap-12">
-                            <div className="text-center">
-                                <p className="text-4xl font-black text-primary">{items.length}</p>
+                        <Card className="p-12 md:p-20 rounded-[4rem] bg-slate-50/50 backdrop-blur-sm border-none shadow-inner flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
+                            <div className="flex flex-col items-center">
+                                <p className="text-6xl font-black text-primary mb-2">{items.length}</p>
                                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Total Items</p>
                             </div>
-                            <Separator className="h-12 w-[1px] bg-border/50 hidden sm:block" />
-                            <div className="text-center">
-                                <p className="text-4xl font-black text-accent">{categories.length}</p>
+                            
+                            <div className="hidden md:block w-[1px] h-20 bg-border/50" />
+                            
+                            <div className="flex flex-col items-center">
+                                <p className="text-6xl font-black text-accent mb-2">{categories.length}</p>
                                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Categories</p>
                             </div>
-                            <Separator className="h-12 w-[1px] bg-border/50 hidden sm:block" />
-                            <div className="text-center">
-                                <p className="text-4xl font-black text-secondary">85%</p>
+                            
+                            <div className="hidden md:block w-[1px] h-20 bg-border/50" />
+                            
+                            <div className="flex flex-col items-center">
+                                <p className="text-6xl font-black text-secondary mb-2">85%</p>
                                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Wardrobe Health</p>
                             </div>
                         </Card>

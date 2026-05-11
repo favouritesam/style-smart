@@ -147,8 +147,8 @@ export default function DailyOutfitPage() {
             
             // Filter logic based on vibe
             if (vibe === 'formal') {
-                const gowns = wardrobeItems.filter(i => i.category === 'dresses' || i.name.toLowerCase().includes('gown'));
-                const trousers = wardrobeItems.filter(i => i.category === 'bottoms' && (i.name.toLowerCase().includes('trouser') || i.name.toLowerCase().includes('jean')));
+                const gowns = wardrobeItems.filter(i => i.category === 'gowns' || i.name.toLowerCase().includes('gown'));
+                const trousers = wardrobeItems.filter(i => i.category === 'trousers' || (i.category === 'bottoms' && i.name.toLowerCase().includes('trouser')));
                 const formalTops = wardrobeItems.filter(i => i.category === 'tops' && !i.name.toLowerCase().includes('hoodie'));
                 
                 if (gowns.length > 0 && Math.random() > 0.5) {
@@ -159,7 +159,7 @@ export default function DailyOutfitPage() {
                     if (t && top) selectedItems = [t.id, top.id];
                 }
             } else if (vibe === 'casual' || vibe === 'comfortable') {
-                const shorts = wardrobeItems.filter(i => i.category === 'bottoms' && i.name.toLowerCase().includes('short'));
+                const shorts = wardrobeItems.filter(i => i.category === 'shorts' || (i.category === 'bottoms' && i.name.toLowerCase().includes('short')));
                 const tops = wardrobeItems.filter(i => i.category === 'tops');
                 const t = shorts[Math.floor(Math.random() * shorts.length)];
                 const top = tops[Math.floor(Math.random() * tops.length)];

@@ -21,6 +21,7 @@ import {
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { toast } from 'sonner';
 
 /**
  * Animation Variants
@@ -94,7 +95,7 @@ export default function PressPage() {
                             >
                                 {releases.map((release, i) => (
                                     <motion.div key={i} variants={itemVariants}>
-                                        <Card className="group p-8 rounded-[2.5rem] border-border/50 hover:border-primary/30 transition-all cursor-pointer shadow-xl">
+                                        <Card onClick={() => toast.info("Opening full press release...")} className="group p-8 rounded-[2.5rem] border-border/50 hover:border-primary/30 transition-all cursor-pointer shadow-xl">
                                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                                                 <div className="space-y-2">
                                                     <span className="text-[10px] font-black uppercase tracking-widest text-primary/60">{release.category}</span>
@@ -119,7 +120,7 @@ export default function PressPage() {
                             <Card className="p-8 rounded-[3rem] border-none shadow-2xl bg-gradient-to-br from-primary to-accent text-white overflow-hidden relative">
                                 <div className="relative z-10 space-y-6">
                                     <p className="font-bold text-lg opacity-90">Download our complete brand assets including logos, high-res photos, and company bio.</p>
-                                    <Button className="w-full h-14 rounded-2xl bg-white text-primary hover:bg-white/90 font-black shadow-xl">
+                                    <Button onClick={() => toast.success("Preparing media kit download...")} className="w-full h-14 rounded-2xl bg-white text-primary hover:bg-white/90 font-black shadow-xl">
                                         <Download className="w-5 h-5 mr-2" /> DOWNLOAD KIT (.ZIP)
                                     </Button>
                                     <p className="text-[10px] uppercase font-black tracking-widest opacity-60 text-center">Version 2.4 | 145 MB</p>
@@ -141,7 +142,18 @@ export default function PressPage() {
                                         <p className="font-bold">partners@stylesmart.ai</p>
                                     </div>
                                 </div>
-                                <Button variant="outline" className="w-full h-12 rounded-xl font-bold border-2">
+                                <Button 
+                                    onClick={() => {
+                                        if (navigator.share) {
+                                            navigator.share({ title: 'StyleSmart Newsroom', url: window.location.href });
+                                        } else {
+                                            navigator.clipboard.writeText(window.location.href);
+                                            toast.success("Newsroom link copied to clipboard!");
+                                        }
+                                    }}
+                                    variant="outline" 
+                                    className="w-full h-12 rounded-xl font-bold border-2"
+                                >
                                     <Share2 className="w-4 h-4 mr-2" /> SHARE NEWSROOM
                                 </Button>
                             </Card>

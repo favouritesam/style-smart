@@ -6,6 +6,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
 
@@ -17,6 +18,17 @@ import { Button } from '@/components/ui/button';
 export default function BlogPage() {
     const posts = [
         {
+            slug: "mastering-color-harmony",
+            title: "Mastering Color Harmony: A Guide for Beginners",
+            excerpt: "Understanding the color wheel is the first step to looking effortlessly put together. We break down the science of matching.",
+            date: "May 12, 2024",
+            author: "StyleSmart Team",
+            category: "Style Tips",
+            color: "bg-primary/10 text-primary",
+            featured: true
+        },
+        {
+            slug: "ai-changing-fashion",
             title: "How AI is Changing the Way We Dress",
             excerpt: "Discover how machine learning algorithms are helping people find their perfect color combinations.",
             date: "May 10, 2024",
@@ -25,6 +37,7 @@ export default function BlogPage() {
             color: "bg-blue-500/10 text-blue-500"
         },
         {
+            slug: "minimalist-wardrobe-essentials",
             title: "5 Essentials for a Minimalist Wardrobe",
             excerpt: "Building a versatile closet doesn't require hundreds of items. Here are the core pieces you need.",
             date: "May 8, 2024",
@@ -33,6 +46,7 @@ export default function BlogPage() {
             color: "bg-accent/10 text-accent"
         },
         {
+            slug: "dressing-for-rain-style-function",
             title: "Dressing for the Rain: Style Meets Function",
             excerpt: "Don't let bad weather ruin your outfit. Learn how to layer effectively while staying dry.",
             date: "May 5, 2024",
@@ -41,6 +55,9 @@ export default function BlogPage() {
             color: "bg-primary/10 text-primary"
         }
     ];
+
+    const featuredPost = posts.find(p => p.featured) || posts[0];
+    const regularPosts = posts.filter(p => !p.featured);
 
     return (
         <MainLayout>
@@ -62,20 +79,22 @@ export default function BlogPage() {
                         <Card className="p-8 md:p-12 rounded-[3rem] border-none shadow-2xl bg-gradient-to-br from-card to-muted flex flex-col lg:flex-row gap-12 items-center">
                             <div className="flex-1 space-y-6">
                                 <span className="px-4 py-1 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-widest">Featured Post</span>
-                                <h2 className="text-3xl md:text-5xl font-black leading-tight">Mastering Color Harmony: <br /> A Guide for Beginners</h2>
+                                <h2 className="text-3xl md:text-5xl font-black leading-tight">{featuredPost.title}</h2>
                                 <p className="text-xl text-muted-foreground leading-relaxed">
-                                    Understanding the color wheel is the first step to looking effortlessly put together. We break down the science of matching.
+                                    {featuredPost.excerpt}
                                 </p>
                                 <div className="flex items-center gap-6 pt-4">
                                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                        <Calendar className="w-4 h-4" /> May 12, 2024
+                                        <Calendar className="w-4 h-4" /> {featuredPost.date}
                                     </div>
                                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                        <User className="w-4 h-4" /> StyleSmart Team
+                                        <User className="w-4 h-4" /> {featuredPost.author}
                                     </div>
                                 </div>
-                                <Button onClick={() => toast.info("Opening full article...")} size="lg" className="rounded-2xl px-8 h-14 bg-primary hover:bg-primary/90 text-lg font-bold group">
-                                    Read Article <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                <Button asChild size="lg" className="rounded-2xl px-8 h-14 bg-primary hover:bg-primary/90 text-lg font-bold group">
+                                    <Link href={`/blog/${featuredPost.slug}`}>
+                                        Read Article <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </Link>
                                 </Button>
                             </div>
                             <div className="flex-1 w-full aspect-video lg:aspect-square bg-primary/5 rounded-[2rem] border border-primary/10 flex items-center justify-center">
@@ -86,7 +105,7 @@ export default function BlogPage() {
 
                     {/* Post Grid */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {posts.map((post, idx) => (
+                        {regularPosts.map((post, idx) => (
                             <motion.div 
                                 key={idx}
                                 initial={{ opacity: 0, y: 20 }}
@@ -103,9 +122,9 @@ export default function BlogPage() {
                                     </p>
                                     <div className="pt-6 border-t border-border flex items-center justify-between">
                                         <span className="text-xs font-bold text-muted-foreground">{post.date}</span>
-                                        <button onClick={() => toast.info("Opening article...")} className="p-2 bg-muted rounded-full group-hover:bg-primary group-hover:text-white transition-all">
+                                        <Link href={`/blog/${post.slug}`} className="p-2 bg-muted rounded-full group-hover:bg-primary group-hover:text-white transition-all">
                                             <ArrowRight className="w-4 h-4" />
-                                        </button>
+                                        </Link>
                                     </div>
                                 </Card>
                             </motion.div>
