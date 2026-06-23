@@ -6,11 +6,23 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Menu, X, LogOut, User, MoreVertical, Sparkles, Calendar, ShoppingBag, Bot, Heart } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import {useRouter} from 'next/navigation';
+import {
+    Menu,
+    X,
+    LogOut,
+    User,
+    MoreVertical,
+    Sparkles,
+    Calendar,
+    ShoppingBag,
+    Bot,
+    Heart,
+    MessageSquare
+} from 'lucide-react';
+import {Button} from '@/components/ui/button';
 import {useAuthStore} from '@/lib/store';
 
 /**
@@ -21,7 +33,7 @@ import {useAuthStore} from '@/lib/store';
 export function Header() {
     const router = useRouter();
     // Get user and auth data from Zustand store
-    const { user, isAuthenticated, logout } = useAuthStore();
+    const {user, isAuthenticated, logout} = useAuthStore();
 
     // Mobile menu toggle state
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -42,12 +54,14 @@ export function Header() {
 
     // Navigation links shown in header - only visible when authenticated
     const navLinks = [
-        { label: 'Home', href: '/', icon: null },
-        { label: 'Wardrobe', href: '/wardrobe', icon: ShoppingBag },
-        { label: 'AI Stylist', href: '/ai-stylist', icon: Bot },
-        { label: 'Daily Outfit', href: '/daily-outfit', icon: Calendar },
-        { label: 'Saved Gems', href: '/favorites', icon: Heart },
-        { label: 'Recommendations', href: '/recommendations', icon: Sparkles },
+
+        {label: 'Home', href: '/', icon: null},
+        {label: 'Wardrobe', href: '/wardrobe', icon: ShoppingBag},
+        {label: 'AI Stylist', href: '/ai-stylist', icon: Bot},
+        {label: 'Daily Outfit', href: '/daily-outfit', icon: Calendar},
+        {label: 'Saved Gems', href: '/favorites', icon: Heart},
+        {label: 'Recommendations', href: '/recommendations', icon: Sparkles},
+        {label: 'AI Chat', href: '/ai-assistant', icon: MessageSquare},
     ];
 
     return (
@@ -62,10 +76,12 @@ export function Header() {
                     >
                         {/* Brand text with hover effect */}
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white font-bold text-sm">
+                            <div
+                                className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white font-bold text-sm">
                                 S
                             </div>
-                            <span className="text-lg font-bold text-foreground hidden sm:inline group-hover:text-accent transition-colors">
+                            <span
+                                className="text-lg font-bold text-foreground hidden sm:inline group-hover:text-accent transition-colors">
                 StyleSmart
               </span>
                         </div>
@@ -82,7 +98,7 @@ export function Header() {
                                         href={link.href}
                                         className="px-3 py-2 text-sm font-medium text-foreground hover:text-accent hover:bg-muted rounded-md transition-all duration-200 flex items-center gap-2"
                                     >
-                                        {Icon && <Icon className="w-4 h-4" />}
+                                        {Icon && <Icon className="w-4 h-4"/>}
                                         {link.label}
                                     </Link>
                                 );
@@ -95,9 +111,9 @@ export function Header() {
                         {isAuthenticated && user ? (
                             // Authenticated user actions
                             <div className="hidden sm:flex items-center gap-3">
-                <span className="text-sm text-muted-foreground">
-                  {user.fullName.split(' ')[0]}
-                </span>
+                                <span className="text-sm text-muted-foreground">
+                                    {user.fullName.split(' ')[0]}
+                                </span>
                                 {user.avatar ? (
                                     <img
                                         src={user.avatar}
@@ -105,7 +121,8 @@ export function Header() {
                                         className="w-8 h-8 rounded-full object-cover border border-accent"
                                     />
                                 ) : (
-                                    <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-xs font-bold">
+                                    <div
+                                        className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-xs font-bold">
                                         {user.fullName.charAt(0).toUpperCase()}
                                     </div>
                                 )}
@@ -138,9 +155,9 @@ export function Header() {
                             aria-label="Toggle menu"
                         >
                             {isMobileMenuOpen ? (
-                                <X className="w-6 h-6" />
+                                <X className="w-6 h-6"/>
                             ) : (
-                                <Menu className="w-6 h-6" />
+                                <Menu className="w-6 h-6"/>
                             )}
                         </button>
 
@@ -154,13 +171,14 @@ export function Header() {
                                     >
                                         {/*<MoreVertical className="w-5 h-5" />*/}
                                     </summary>
-                                    <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg py-2 z-10">
+                                    <div
+                                        className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg py-2 z-10">
                                         <Link
                                             href="/profile"
                                             className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted transition-colors"
                                             onClick={closeMobileMenu}
                                         >
-                                            <User className="w-4 h-4" />
+                                            <User className="w-4 h-4"/>
                                             Profile
                                         </Link>
                                         <button
@@ -173,7 +191,7 @@ export function Header() {
                                             }}
                                             className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted w-full text-left text-destructive transition-colors"
                                         >
-                                            <LogOut className="w-4 h-4" />
+                                            <LogOut className="w-4 h-4"/>
                                             Logout
                                         </button>
                                     </div>
@@ -231,7 +249,7 @@ export function Header() {
                                         className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted rounded-md transition-colors"
                                         onClick={closeMobileMenu}
                                     >
-                                        <User className="w-4 h-4" />
+                                        <User className="w-4 h-4"/>
                                         Profile
                                     </Link>
                                     <button
@@ -245,7 +263,7 @@ export function Header() {
                                         }}
                                         className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted rounded-md text-destructive w-full transition-colors"
                                     >
-                                        <LogOut className="w-4 h-4" />
+                                        <LogOut className="w-4 h-4"/>
                                         Logout
                                     </button>
                                 </div>

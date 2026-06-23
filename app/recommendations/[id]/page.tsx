@@ -12,11 +12,9 @@ import { motion } from 'framer-motion';
 import { 
     ChevronLeft, 
     Sparkles, 
-    Shield, 
-    Cloud, 
+    Cloud,
     Zap, 
-    Heart, 
-    Share2, 
+    Share2,
     Check,
     Bookmark,
     ShoppingBag,
