@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
-    Cloud,
+    Cloud, 
     CloudRain,
     Sun,
     Wind,

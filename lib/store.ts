@@ -29,7 +29,7 @@ export interface WardrobeItem {
     id: string;
     name: string;
     color: string;
-    category: 'tops' | 'bottoms' | 'outerwear' | 'shoes' | 'accessories' | 'shorts' | 'trousers' | 'gowns' | 'skirts' | 'hoodies' | 'slippers' | 'caps' | 'polos' | 'nightwear';
+    category: 'tops' | 'bottoms' | 'outerwear' | 'shoes' | 'accessories' | 'shorts' | 'trousers' | 'gowns' | 'skirts' | 'hoodies' | 'slippers' | 'caps' | 'polos' | 'nightwear' | 'dresses';
     image?: string;
     isFavorite?: boolean;
     createdAt: string;

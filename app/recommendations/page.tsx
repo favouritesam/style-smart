@@ -12,14 +12,8 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
     Sparkles,
     TrendingUp,
-    Calendar,
     Loader2,
-    Heart,
     Share2,
-    ChevronRight,
-    Zap,
-    Cloud,
-    Shield,
     Shuffle,
     Bookmark
 } from 'lucide-react';
@@ -55,7 +49,7 @@ const cardVariants: Variants = {
 export default function RecommendationsPage() {
     const router = useRouter();
     const { recommendations, isLoading, error, setRecommendations, setIsLoading, setError } = useRecommendationsStore();
-    const [activeTab, setActiveTab] = useState<'all' | 'formal' | 'casual'>('all');
+    // const [activeTab, setActiveTab] = useState<'all' | 'formal' | 'casual'>('all');
 
     const handleRefresh = async () => {
         setIsLoading(true);
@@ -88,9 +82,9 @@ export default function RecommendationsPage() {
         });
     };
 
-    const handleViewDetails = (id: string) => {
-        router.push(`/recommendations/${id}`);
-    };
+    // const handleViewDetails = (id: string) => {
+    //     router.push(`/recommendations/${id}`);
+    // };
 
     useEffect(() => {
         const fetchRecommendations = async () => {
@@ -134,6 +128,16 @@ export default function RecommendationsPage() {
                         weather: 'Mild',
                         sustainability: 91,
                         image: '/images/recommendations/minimalist_monday.png'
+                    },
+
+                    {
+                        id: '5',
+                        outfit: { id: 'o5', name: 'Minimalist Monday', items: [], confidence: 100, occasion: 'Formal' },
+                        reason: 'Clean lines and neutral tones for a focused workday.',
+                        occasion: 'Office Style',
+                        weather: 'Cloudy',
+                        sustainability: 81,
+                        image: '/images/wardrobe/navy_blazer.png'
                     }
 
                 ];
